@@ -1,6 +1,6 @@
 =head1 NAME
 
-HTML::Puzzle - A framework to build web component based on database. (ver 0.03)
+HTML::Puzzle - A framework to build web component based on database. (ver 0.12)
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@ package HTML::Puzzle::DBTable;
 
 require 5.005;
 
-$VERSION 			= "0.10";
+$VERSION 			= "0.12";
 sub Version 		{ $VERSION; }
 
 use Carp;

@@ -111,7 +111,11 @@ can be personalized.
 
 Create an instance of HTML::Puzzle::DBTable. Requires two costructor 
 parameters: dbh filled with a dbi handle to storing db and name with name of 
-table where data are saved.
+table where data are saved. 
+
+With another optional parameter 'date_format' you can set the date format that
+will be returned in the date_format field of returned hash. Default date_format
+value is '%Y-%m-%d'.
 
 =head2 add(\%fieldsItem)
 
@@ -141,6 +145,9 @@ getting only last nrow records, order is a string that must be asc or desc for
 ordering returned data and an hash reference containing a filter hash where keys 
 are fields name and values are field value over which the where sql section will 
 be built.
+
+Another field 'date_format' it's added to hash and is set with the same date field 
+value but formatted with 'date_format' costructor optional parameter. 
 
 =head2 create()
 

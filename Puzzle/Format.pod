@@ -87,6 +87,14 @@ Under costruction
 
 Under costruction
 
+=head2 order ()
+
+Set an order string for returning data.
+
+=head2 date_format()
+
+Set a date format for returning date_format field.
+
 =head1 DEBUG COMPONENT 
 
 There is also two static constants: a DEBUG_FILE_PATH and a DEBUG constant that 

@@ -1,7 +1,7 @@
 package HTML::Puzzle;
 
 
-$VERSION = "0.11";
+$VERSION = "0.13";
 sub Version { $VERSION; }
 
 require 5.005;

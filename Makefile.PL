@@ -26,13 +26,9 @@ $packageName = 'HTML::Puzzle';
 #  'XML::LibXSLT' => { version => 1.04, comment => '(needed if you want to use XSLT tranformations)' },
 #);
 #
-#%Example = (
-#  'DBD::CSV'       => {},
-#  'HTTP::Headers'  => {},
-#  'SQL::Statement' => {},
-#  'Text::CSV_XS'   => {},
-#  'Apache::Reload' => {},
-#);
+%Example = (
+  'DBD::mysql'       => {},
+);
 
 #insert _name and _installed_version into the hash(s)
 sub init {

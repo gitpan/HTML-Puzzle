@@ -2,7 +2,7 @@ package HTML::Puzzle::Format;
 
 require 5.005;
 
-$VERSION 			= "0.10";
+$VERSION 			= "0.12";
 sub Version 		{ $VERSION; }
 
 use Carp;
@@ -23,6 +23,8 @@ my %fields 	=
 				 tablename 	=> undef,
 				 filename 	=> undef,
 				 opt_items 	=> {},
+				 order		=> undef,
+				 date_format	=> '%Y-%m-%d',
 				 filter		=> [],   
 			     );
      
@@ -67,9 +69,10 @@ sub _init {
 	if (defined $self->{dbh} && defined $self->{tablename}) {
 		# internal autofilled items
 		my $dbT	= new HTML::Puzzle::DBTable(    dbh     => $self->{dbh},
-                                                name    => $self->{tablename}
+                                                name    => $self->{tablename},
+						date_format => $self->{date_format}
                                             );
-        $self->{items}	= $dbT->hash_items();
+        $self->{items}	= $dbT->hash_items(undef,$self->{order});
 	}									
 }
 
@@ -142,6 +145,7 @@ sub DESTROY {
 }
 
 sub items { my $s=shift; return @_ ? ($s->{items}=shift) : $s->{items} }
+sub order { my $s=shift; return @_ ? ($s->{order}=shift) : $s->{order} }
 sub filename { my $s=shift; return @_ ? ($s->{filename}=shift) 
 															: $s->{filename} }
 sub opt_items { my $s=shift; return @_ ? ($s->{opt_items}=shift) 
