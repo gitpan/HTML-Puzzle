@@ -1,5 +1,9 @@
 Revision history for Perl extension HTML::Puzzle.
 
+0.11 (2002-04-02)
+=================
+- Added required module HTML::Template::Extension in the Makefile.PL
+
 0.10 (2002-03-24)
 =================
 - Removed H::P::Template. Now used HTML::Template::Extension.

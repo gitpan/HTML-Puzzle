@@ -109,6 +109,7 @@ sub check_mods {
     for ( sort { $a->{_name} cmp $b->{_name} } @install ) {
       printf "  %-${ilen}s %s\n", $_->{_name}, $_->{comment} || '';
     }
+    exit;
   }
 
   if (@update) {
@@ -117,6 +118,7 @@ sub check_mods {
       printf "  %-${ulen}s (%s) to at least %s %s\n", $_->{_name}, $_->{_installed_version},
         $_->{version}, $_->{comment} || '';
     }
+    exit;
   }
 }
 
