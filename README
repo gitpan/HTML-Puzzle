@@ -16,6 +16,7 @@ Installation
 0.  Prerequisites:
 	- Perl version 5.005_03 or more recent.
 	- CPAN DBI module.
+	- HTML::Template::Extension
 	- A CPAN DBD driver module (currenty only Mysql are tested)
 
 1.  Installation steps:

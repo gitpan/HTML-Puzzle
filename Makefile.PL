@@ -12,6 +12,7 @@ $packageName = 'HTML::Puzzle';
 
 %Requirements = (
   'DBI'  => { version => 1.20 },
+  'HTML::Template::Extension'  => { version => 0.11 },
   'FileHandle',
   'Data::Dumper',
 );

@@ -1,5 +1,22 @@
 Revision history for Perl extension HTML::Puzzle.
 
+0.10 (2002-03-24)
+=================
+- Removed H::P::Template. Now used HTML::Template::Extension.
+- The HTML::Template was called enabling loop_context_vars
+- Fixed default initialized parameter error.
+- Added initial documentation for H::P::Template
+- Added initial documentation for H::P::Format
+- The date field in H::P::DBTable::add method is set, by default, to now.
+
+0.09 (2002-03-22)
+=================
+- Unrealized version
+
+0.08 (2002-03-19)
+=================
+- Unrealized version
+
 0.07 (2002-03-17)
 =================
 - Added method "update" to H::P::DBTable for update records.

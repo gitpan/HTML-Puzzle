@@ -35,7 +35,7 @@ if (exists($tables{'Test'})) {
     exit;
 }
 # Fill with three items -- TO DO
-foreach (qw/First Second Third/) {
+foreach (qw/First Second Third Forth/) {
 	my $addItem		= {
 						'title'			=> "$_ title",
 						'txt_short'		=> "$_ short text",
@@ -47,7 +47,7 @@ foreach (qw/First Second Third/) {
 	$comp->add($addItem);
 }
 print "ok " . ++$testid . "\n";
-$comp->delete(2);
+$comp->delete([2,4]);
 print "ok " . ++$testid . "\n";
 # Get  items as array
 my $itm			= $comp->array_items();

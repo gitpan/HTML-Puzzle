@@ -2,7 +2,7 @@ package HTML::Puzzle::Format;
 
 require 5.005;
 
-$VERSION 			= "0.07";
+$VERSION 			= "0.10";
 sub Version 		{ $VERSION; }
 
 use Carp;
@@ -10,7 +10,7 @@ use Carp;
 use FileHandle;
 use vars qw($DEBUG $DEBUG_FILE_PATH);
 use strict;
-use HTML::Puzzle::Template;
+use HTML::Template::Extension;
 use HTML::Puzzle::DBTable;
 
 $DEBUG 				= 0;
@@ -19,10 +19,10 @@ $DEBUG_FILE_PATH	= '/tmp/HTML-Puzzle-Format.debug.txt';
 my %fields 	=
 			    (
 				 items 		=> [],
-				 dbh 		=>undef,
+				 dbh 		=> undef,
 				 tablename 	=> undef,
 				 filename 	=> undef,
-				 opt_itemps => {},
+				 opt_items 	=> {},
 				 filter		=> [],   
 			     );
      
@@ -75,8 +75,10 @@ sub _init {
 
 sub html {
 	my $self = shift;
-	my $tmpl = new HTML::Puzzle::Template ( 'filename' => $self->{filename},
-											'autoDeleteHeader' => 1 );
+	my $tmpl = new HTML::Template::Extension (  'filename' => $self->{filename},
+												'autoDeleteHeader' => 1 ,
+												'plugins' => ["SLASH_VAR",
+														 	 "HEAD_BODY"]);
 	my $items = $self->{items};
 	# handle items filters if necessary
   	$self->_call_filters(\$items) if @{$self->{filter}};

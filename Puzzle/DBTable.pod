@@ -65,6 +65,8 @@ HTML::Puzzle::DBTable - Connection module to data tables
  #       ];
  # delete record
  $comp->delete(2);
+ # delete group of records
+ $comp->delete([2,5,7,9]);
  # drop table
  $comp->table;
  
@@ -117,9 +119,9 @@ Insert a news in the table. Reguires as single params an hash reference that
 have db table field name for keys and field values for hash value. Obviously 
 hash must have all required db table fields.
 
-=head2 delete(@ids) 
+=head2 delete(\@ids) 
 
-Delete records in table. Requires a single parameter, an array with numerical 
+Delete records in table. Requires a single parameter, an array ref with numerical 
 ids of records to delete.
 
 =head2 array_items($nrow,$order,\%filter) 

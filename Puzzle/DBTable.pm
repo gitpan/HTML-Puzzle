@@ -2,7 +2,7 @@ package HTML::Puzzle::DBTable;
 
 require 5.005;
 
-$VERSION 			= "0.07";
+$VERSION 			= "0.10";
 sub Version 		{ $VERSION; }
 
 use Carp;
@@ -63,6 +63,13 @@ sub add {
 	my $self 	= shift;
 	my $values 	= shift;
 	my %values	= %{$values};
+	if (!exists $values{date}) {
+		# built default date
+		my @lt = localtime;
+		my $lt = $lt[5]+1900; $lt .= &_f2($lt[4]+1); $lt.=&_f2($lt[3]);
+		$lt .= &_f2($lt[2]); $lt .= &_f2($lt[1]); $lt.=&_f2($lt[0]);
+		$values{date} = $lt;
+	}
 	# costruisco la stringa chiave1,chiave2,...
 	my $keys	= join(',',keys(%values));
 	# array dei valori
@@ -96,8 +103,10 @@ sub update {
 sub delete {
 	my $self	= shift;
 	my $id		= shift;
-	my $sql		= qq/delete from $self->{name} where id = ?/;
-	$self->{dbh}->do($sql,undef,$id) or 
+	$id = [$id] unless (ref($id)) ;
+	my $in = join(', ',map('?',@{$id}));
+	my $sql		= qq/delete from $self->{name} where id in ($in)/;
+	$self->{dbh}->do($sql,undef,@{$id}) or 
 		die "Unable to execute $sql with id $id ";
 }
 
@@ -264,6 +273,11 @@ sub _ask_for_prompt {
 	chomp(my $word = <STDIN>);
 	if ($hidden) {print "\n"; system "stty echo";}
 	return $word || $default;	
+}
+
+sub _f2 {
+	my $chars = shift;
+	return length($chars) == 1 ? "0$chars" : $chars;	
 }
 
 
