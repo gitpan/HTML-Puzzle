@@ -1,5 +1,29 @@
 Revision history for Perl extension HTML::Puzzle.
 
+0.07 (2002-03-17)
+=================
+- Added method "update" to H::P::DBTable for update records.
+- Added property "dbh" and "tablename" for calling internally H::P::DBTable
+  from H::P::Format without explicitly create an istance of H::P::DBTable.
+- Added method "filter" to H::P::Format to postprocessing data obtained from
+  H::P::DBTable before filling template page
+
+0.06 (2002-03-15)
+=================
+- Now H::P::DBTable have a new property date_format for formatting the date
+  field. The return methods *_items now have a new field "date_format" with date
+  formatted according to "date_format" property. The default value of this
+  property is "%Y-%m-%d".
+- Added HTML::Puzzle::Format that, using an html template, returns a web page 
+  filling the template with data obtained from HTML::Puzzle::DBTable module.
+
+0.05 (2002-03-13)
+=================
+- Added HTML::Puzzle::Template which is a wrapper for CPAN HTML::Template for
+  supporting special TAGS (</TMPL_VAR>), autodeleting html header and footer 
+  (<HTML>...<BODY>) and (</BODY></HTML>) tags returning only the body code, 
+  extracting javascript code present in html header.
+
 0.03 (2002-03-11)
 =================
 - First release of HTML::Puzzle

@@ -6,8 +6,8 @@
 # Change 1..1 below to 1..last_test_to_print .
 # (It may become useful if the test is moved to ./t subdirectory.)
 
-BEGIN { $| = 1; print "1..7\n"; }
-END {print "not ok $testid\n" unless $loaded;}
+BEGIN { $| = 1; print "1..6\n"; }
+END {print "not ok " . ++$testid . "\n" unless $loaded;}
 
 use DBI;
 use HTML::Puzzle::DBTable;
@@ -42,7 +42,7 @@ foreach (qw/First Second Third/) {
 						'txt_long'		=> "$_ very long long text :-)",
 						'link'			=> "http://$_.link.itm/",
 						'link_img'		=> "http://$_.link.img/",
-						'data'			=> '2002-07-21'
+						'date'			=> '2002-07-21'
 						};
 	$comp->add($addItem);
 }
@@ -76,18 +76,6 @@ if (scalar(@{$itm}) == 1) {
 } else {
     exit;
 }
-# Destroy table support
-$comp->drop;
-@names = $dbh->tables;
-%tables = map {$_ => '1'} @names;
-if (!exists($tables{'Test'})) {
-	print "ok " . ++$testid . "\n";
-} else {
-    exit;
-}
-
-
-
 
 $loaded = 1;
 

@@ -28,6 +28,14 @@ Connection module to data tables
 
 =back
 
+=head1  Examples
+
+Have a look to 
+
+ http://www.ebruni.it/en/software/perl/cpan/html/puzzle/examples/ex1.htm
+
+to see some examples on what you can simply do using this module.
+
 =head1 BUGS
 
 I am aware of no bugs - if you find one, send me an e-mail at info@ebruni.it

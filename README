@@ -24,6 +24,13 @@ Installation
 		make (and ask to questions to you db configuration)
 		make test
 		make install
+
+Examples
+--------
+
+Have a look to 
+	http://www.ebruni.it/en/software/perl/cpan/html/puzzle/examples/ex1.htm
+to see some examples on what you can simply do using this module.
 		
 Disclaimer
 ----------

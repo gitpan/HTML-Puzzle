@@ -2,7 +2,7 @@ package HTML::Puzzle::DBTable;
 
 require 5.005;
 
-$VERSION 			= "0.03";
+$VERSION 			= "0.07";
 sub Version 		{ $VERSION; }
 
 use Carp;
@@ -20,6 +20,7 @@ my %fields 	=
 			    (
 				    dbh			=>	undef,
 					name		=> 	undef,
+					date_format	=>  '%Y-%m-%d',
 			     );
      
 my @fields_req	= qw/dbh name/;
@@ -31,11 +32,11 @@ sub new
     my $class = ref($proto) || $proto;
     my $self = {};
     bless $self,$class;
-    $self->init(@_);
+    $self->_init(@_);
     return $self;
 }							
 
-sub init {
+sub _init {
 	my $self = shift;
 	my (%options) = @_;
 	# Assign default options
@@ -72,6 +73,24 @@ sub add {
 	debug($sql);
 	$self->{dbh}->do($sql,undef,@values) or 
 		die "Unable to execute $sql with params " . join(';',@values);
+}
+
+sub update {
+	my $self 	= shift;
+	my $fields	= shift;
+	my $filter	= shift;
+	# create sql string
+	my $sql 	= qq/Update $self->{name} set /;
+	# built section field1 = ? for update
+	my $set = join(',',map("$_ = ? ",keys(%{$fields})));
+	# built where section
+	my $where = join(',',map("$_ = ? ",keys(%{$filter})));
+	# complete sql is...
+	$sql .= qq/$set where $where/;
+	# get values
+	my @values = (values(%{$fields}),values(%{$filter}));
+	$self->{dbh}->do($sql,undef,@values) or 
+		die "Unable to execute $sql with params: " . join(@values);
 }
 
 sub delete {
@@ -118,7 +137,7 @@ sub create {
 			  link varchar(255) default NULL,
 			  link_img varchar(255) default NULL,
 			  enable tinyint(1) unsigned default '1',
-			  data datetime NOT NULL default '0000-00-00 00:00:00',
+			  date datetime NOT NULL default '0000-00-00 00:00:00',
 			  ts timestamp(2) NOT NULL,
 			  UNIQUE KEY id (id)
 			) TYPE=MyISAM
@@ -161,7 +180,8 @@ sub _item_sql {
 	my $order 			= shift || "desc";
 	my $filter			= shift;
 	# Costruzione della stringa sql per il recupero dei dati
-	my $sql  = qq/select * from $self->{name} /;
+	my $sql  = qq/select *,DATE_FORMAT(date,'$self->{date_format}') 
+					as date_format from $self->{name} /;
 	$sql 	.= qq/where / . join (',',map("$_ = ? ",keys(%{$filter}))) 
 																if ($filter);
 	$sql	.= qq/order by id $order /;
@@ -252,6 +272,8 @@ sub _ask_for_prompt {
 sub dbh { my $s=shift; return @_ ? ($s->{dbh}=shift) : $s->{dbh} }
 sub name { my $s=shift; return @_ ? ($s->{name}=shift) 
 															: $s->{tableName} }
+sub date_format { my $s=shift; return @_ ? ($s->{date_format}=shift) 
+															: $s->{date_format} }
 
 # Preloaded methods go here.
 

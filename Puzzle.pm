@@ -1,12 +1,12 @@
 package HTML::Puzzle;
 
 
-$VERSION = "0.03";
+$VERSION = "0.07";
 sub Version { $VERSION; }
 
 require 5.005;
-use strict;
-use warnings;
+use HTML::Puzzle::DBTable;
+use HTML::Puzzle::Format;
 
 
 1;

@@ -144,7 +144,7 @@ sub _prompt_db_info {
 Enter the DBD driver name [mysql]
 Enter the database hostname [localhost]
 Enter database port number [3128]
-Enter database name
+Enter database name [test]
 Enter an userid which can manage tables [root]
 Enter password
 EOF

@@ -1,3 +1,6 @@
 To DO list for HTML::Puzzle
 
-- Implementing other usefull modules
+- Modify "delete" method to delete more that one record at time according with
+  documentation.
+- Added support for <CSTART>...</CSTART> tag.
+- Implementing other usefull modules.
